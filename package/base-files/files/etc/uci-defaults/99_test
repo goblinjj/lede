@@ -1,0 +1,12 @@
+touch /root/test
+echo `date` >> /root/test
+echo "ppwd: $ppwd" >> /root/test
+echo "spwd: $spwd" >> /root/test
+
+uci set turboacc.config.tcpcca='bbr'
+# uci set turboacc.config.fullcone='2'
+uci commit
+/etc/init.d/turboacc restart
+
+
+exit 0
