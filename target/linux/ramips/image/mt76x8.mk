@@ -29,6 +29,13 @@ define Build/ravpower-wd009-factory
 endef
 
 
+define Device/qiqi_v1
+  IMAGE_SIZE := 15808k
+  DEVICE_VENDOR := QIQI
+  DEVICE_MODEL := V1
+endef
+TARGET_DEVICES += qiqi_v1
+
 define Device/alfa-network_awusfree1
   IMAGE_SIZE := 7872k
   DEVICE_VENDOR := ALFA Network

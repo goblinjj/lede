@@ -1,0 +1,49 @@
+#include "mt7628an_hiwifi_hc5x61a.dtsi"
+
+/ {
+	compatible = "qiqi,v1", "mediatek,mt7628an-soc";
+	model = "QIQI V1";
+
+	leds {
+		compatible = "gpio-leds";
+
+		led1 {
+			label = "led1";
+			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
+		};
+
+		led2 {
+			label = "led2";
+			gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
+		};
+
+
+		led3 {
+			label = "led3";
+			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
+		};
+
+
+		led4 {
+			label = "led4";
+			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
+		};
+
+	};
+};
+
+&state_default {
+	gpio {
+		groups = "i2c", "i2s", "refclk", "wdt", "p4led_an",
+				"p3led_an", "p2led_an", "p1led_an", "p0led_an", "wled_an";
+		function = "gpio";
+	};
+};
+
+&ehci {
+	status = "disabled";
+};
+
+&ohci {
+	status = "disabled";
+};
