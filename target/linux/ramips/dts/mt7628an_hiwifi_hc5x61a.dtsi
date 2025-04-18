@@ -9,7 +9,7 @@
 	compatible = "hiwifi,hc5x61a", "mediatek,mt7628an-soc";
 
 	chosen {
-		bootargs = "console=ttyS0,115200";
+		bootargs = "console=ttyS0,57600";
 	};
 
 	keys {
