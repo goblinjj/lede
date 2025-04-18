@@ -44,7 +44,7 @@
 			};
 
 			partition@30000 {
-				label = "hw_panic";
+				label = "u-boot-env";
 				reg = <0x30000 0x10000>;
 				read-only;
 			};
@@ -58,25 +58,7 @@
 			partition@50000 {
 				compatible = "denx,uimage";
 				label = "firmware";
-				reg = <0x50000 0xf70000>;
-			};
-
-			partition@fc0000 {
-				label = "oem";
-				reg = <0xfc0000 0x20000>;
-				read-only;
-			};
-
-			bdinfo: partition@fe0000 {
-				label = "bdinfo";
-				reg = <0xfe0000 0x10000>;
-				read-only;
-			};
-
-			partition@ff0000 {
-				label = "backup";
-				reg = <0xff0000 0x10000>;
-				read-only;
+				reg = <0x50000 0xFA0000>;
 			};
 		};
 	};
