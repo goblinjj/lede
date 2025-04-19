@@ -9,36 +9,36 @@
 
 		led1 {
 			label = "led1";
-			gpios = <&gpio 41 GPIO_ACTIVE_LOW>; #LAN1
+			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
 		};
 
 		led2 {
 			label = "led2";
-			gpios = <&gpio 42 GPIO_ACTIVE_LOW>; #LAN2
+			gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
 		};
 
 
 		led3 {
 			label = "led3";
-			gpios = <&gpio 43 GPIO_ACTIVE_LOW>; #WAN
+			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
 		};
 
 
 		led4 {
 			label = "led4";
-			gpios = <&gpio 44 GPIO_ACTIVE_LOW>; #WIFI
+			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 		};
 
 		led5 {
 			label = "led5";
 			gpios = <&gpio 39 GPIO_ACTIVE_HIGH>;
-                        blink-interval = <500>;
+            blink-interval = <500>;
 		};
 
 		led6 {
 			label = "led6";
 			gpios = <&gpio 40 GPIO_ACTIVE_HIGH>;
-                        blink-interval = <500>;
+            blink-interval = <500>;
 		};
 
 	};

@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# 等待网络连通
+until ping -c1 baidu.com &>/dev/null; do
+  sleep 5
+done
+
+touch /root/first
+
+# # 从服务器获取新参数
+# RESPONSE=$(curl -s "http://your-server.com/api/register")
+# NEW_MAC=$(echo $RESPONSE | jq -r '.mac')
+# NEW_SN=$(echo $RESPONSE | jq -r '.sn')
+
+# # 修改MAC地址
+# uci set network.wan.macaddr="$NEW_MAC"
+# uci commit network
+# /etc/init.d/network restart
+
+# # 修改SN码（假设存储在/etc/config/system）
+# uci set system.@system[0].sn="$NEW_SN"
+# uci commit system
+
+# uci set turboacc.config.tcpcca='bbr'
+# # uci set turboacc.config.fullcone='2'
+# uci commit
+# /etc/init.d/turboacc restart
+
+# 自销毁
+rm -f /etc/rc.first
+
