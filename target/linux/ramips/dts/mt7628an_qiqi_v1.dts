@@ -42,6 +42,16 @@
 			gpios = <&gpio 40 GPIO_ACTIVE_LOW>;
             blink-interval = <500>;
 		};
+		led7 {
+			label = "led7";
+			gpios = <&gpio 37 GPIO_ACTIVE_LOW>;
+            blink-interval = <500>;
+		};
+		led8 {
+			label = "led8";
+			gpios = <&gpio 38 GPIO_ACTIVE_LOW>;
+            blink-interval = <500>;
+		};
 
 	};
 };
@@ -49,7 +59,7 @@
 &state_default {
 	gpio {
 		groups = "i2c", "i2s", "refclk", "wdt", "p4led_an",
-				"p3led_an", "p2led_an", "p1led_an", "p0led_an", "wled_an";
+				"p3led_an", "p2led_an", "p1led_an", "p0led_an", "wled_an", "perst";
 		function = "gpio";
 	};
 };
