@@ -42,11 +42,6 @@
 			label = "led7";
 			gpios = <&gpio 37 GPIO_ACTIVE_LOW>;
 		};
-		led8 {
-			label = "led8";
-			gpios = <&gpio 38 GPIO_ACTIVE_LOW>;
-		};
-
 	};
 };
 
