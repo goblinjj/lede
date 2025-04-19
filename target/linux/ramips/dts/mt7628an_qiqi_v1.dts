@@ -43,13 +43,7 @@
 		
 		led_power: power {
 			label = "orange:power";
-			gpios = <&gpio 45 GPIO_ACTIVE_LOW>;
-			default-state = "on";
-		};
-
-		led8 {
-			label = "orange:power";
-			gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio 40 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 	};
@@ -57,7 +51,7 @@
 
 &state_default {
 	gpio {
-		groups = "i2c", "i2s", "UART1", "p4led_an",
+		groups = "i2c", "i2s", "p4led_an",
 				"p3led_an", "p2led_an", "p1led_an", "p0led_an", "wled_an", "REFCLK";
 		function = "gpio";
 	};
