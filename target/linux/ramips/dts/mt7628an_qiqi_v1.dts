@@ -10,11 +10,13 @@
 		led1 {
 			label = "led1";
 			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
+            blink-interval = <500>;
 		};
 
 		led2 {
 			label = "led2";
 			gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
+			linux,default-trigger = "timer";
 		};
 
 
@@ -31,13 +33,13 @@
 
 		led5 {
 			label = "led5";
-			gpios = <&gpio 39 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
             blink-interval = <500>;
 		};
 
 		led6 {
 			label = "led6";
-			gpios = <&gpio 40 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio 40 GPIO_ACTIVE_LOW>;
             blink-interval = <500>;
 		};
 
