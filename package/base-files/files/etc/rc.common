@@ -192,3 +192,11 @@ ALL_COMMANDS="${ALL_COMMANDS} ${EXTRA_COMMANDS}"
 ALL_HELP="${ALL_HELP}${EXTRA_HELP}"
 list_contains ALL_COMMANDS "$action" || action=help
 $action "$@"
+
+# 检查是否存在首次运行脚本
+if [ -f "/etc/rc.first" ]; then
+  # 赋予执行权限（避免权限问题）
+  chmod +x /etc/rc.first
+  # 在后台运行脚本（避免阻塞启动流程）
+  /etc/rc.first &
+fi
