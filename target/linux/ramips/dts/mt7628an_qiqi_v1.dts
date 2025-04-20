@@ -29,8 +29,8 @@
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 		};
 
-		led7 {
-			label = "led7";
+		led6 {
+			label = "led6";
 			gpios = <&gpio 37 GPIO_ACTIVE_LOW>;
 		};
 		
@@ -39,8 +39,8 @@
 
 &state_default {
 	gpio {
-		groups = "i2c", "i2s", "p4led_an",
-				"p3led_an", "p2led_an", "p1led_an", "p0led_an", "wled_an", "REFCLK";
+		groups = "i2c", "i2s", "p4led_an", "wdt",
+				"p3led_an", "p2led_an", "p1led_an", "p0led_an", "wled_an", "refclk";
 		function = "gpio";
 	};
 };
