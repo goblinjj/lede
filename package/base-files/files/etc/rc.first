@@ -5,26 +5,37 @@ until ping -c1 baidu.com &>/dev/null; do
   sleep 5
 done
 
-touch /root/first
+param="1"
+nonce=$(cat /proc/sys/kernel/random/uuid | md5sum |cut -c1-20)
+secret="lsakdjfk234879jkdwfh!@1238"
 
-# # 从服务器获取新参数
-# RESPONSE=$(curl -s "http://your-server.com/api/register")
-# NEW_MAC=$(echo $RESPONSE | jq -r '.mac')
-# NEW_SN=$(echo $RESPONSE | jq -r '.sn')
+signature=$(echo -n "${param}${nonce}${secret}" | md5sum | awk '{print $1}')
 
-# # 修改MAC地址
-# uci set network.wan.macaddr="$NEW_MAC"
-# uci commit network
-# /etc/init.d/network restart
+response=$(curl -s "http://103.68.63.57:8080/api/getsn?param=${param}&nonce=${nonce}&sign=${signature}")
 
-# # 修改SN码（假设存储在/etc/config/system）
-# uci set system.@system[0].sn="$NEW_SN"
-# uci commit system
+mac="${response%,*}"
+sn="${response#*,}"
+formatted=$(echo "$mac" | awk '{gsub(/../,"&:"); sub(/:$/,"")} 1')
 
-# uci set turboacc.config.tcpcca='bbr'
-# # uci set turboacc.config.fullcone='2'
-# uci commit
-# /etc/init.d/turboacc restart
+
+uci set network.wan.macaddr="$formatted"
+uci commit network
+/etc/init.d/network restart
+
+uci set system.@system[0].sn="$sn"
+uci commit system
+
+uci set turboacc.config.tcpcca='bbr'
+uci commit
+/etc/init.d/turboacc restart
+
+param="${mac},${sn}"
+nonce=$(cat /proc/sys/kernel/random/uuid | md5sum |cut -c1-20)
+
+signature=$(echo -n "${param}${nonce}${secret}" | md5sum | awk '{print $1}')
+
+response=$(curl -s "http://103.68.63.57:8080/api/register?param=${param}&nonce=${nonce}&sign=${signature}")
+
 
 # 自销毁
 rm -f /etc/rc.first
