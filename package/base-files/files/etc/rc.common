@@ -192,8 +192,3 @@ ALL_COMMANDS="${ALL_COMMANDS} ${EXTRA_COMMANDS}"
 ALL_HELP="${ALL_HELP}${EXTRA_HELP}"
 list_contains ALL_COMMANDS "$action" || action=help
 $action "$@"
-
-if [ -f "/etc/rc.first" ]; then
-  chmod +x /etc/rc.first
-  /etc/rc.first &
-fi
