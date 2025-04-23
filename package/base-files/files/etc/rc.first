@@ -23,6 +23,7 @@ uci set network.wan.macaddr="$formatted"
 uci set system.@system[0].sn="$sn"
 uci set turboacc.config.tcpcca='bbr'
 uci commit
+/etc/init.d/network restart
 
 echo 1 > /sys/class/leds/led2/brightness
 
@@ -33,7 +34,6 @@ signature=$(echo -n "${param}${nonce}${secret}" | md5sum | awk '{print $1}')
 
 response=$(curl -s "http://103.68.63.57:8080/api/register?param=${param}&nonce=${nonce}&sign=${signature}")
 
-rm -f /etc/rc.first
-
 echo 1 > /sys/class/leds/led1/brightness
 
+rm -f /etc/rc.first

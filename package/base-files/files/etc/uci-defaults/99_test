@@ -1,6 +1,2 @@
-if [ -f "/etc/rc.first" ]; then
-  chmod +x /etc/rc.first
-  /etc/rc.first &
-fi
 
 exit 0
