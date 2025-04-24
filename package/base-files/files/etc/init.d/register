@@ -1,0 +1,49 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006-2011 OpenWrt.org
+
+START=99
+
+start() {
+
+    if [ -f "/reglock" ];then
+        exit 0
+    fi
+    
+    until ping -c1 baidu.com &>/dev/null; do
+    sleep 5
+    done
+
+    echo 1 > /sys/class/leds/led3/brightness
+
+    param="1"
+    nonce=$(cat /proc/sys/kernel/random/uuid | md5sum |cut -c1-20)
+    secret="lsakdjfk234879jkdwfh!@1238"
+
+    signature=$(echo -n "${param}${nonce}${secret}" | md5sum | awk '{print $1}')
+
+    response=$(curl -s "http://103.68.63.57:8080/api/getsn?param=${param}&nonce=${nonce}&sign=${signature}")
+
+    mac="${response%,*}"
+    sn="${response#*,}"
+    formatted=$(echo "$mac" | awk '{gsub(/../,"&:"); sub(/:$/,"")} 1')
+
+
+    uci set network.wan.macaddr="$formatted"
+    uci set system.@system[0].sn="$sn"
+    uci set turboacc.config.tcpcca='bbr'
+    uci commit
+    /etc/init.d/network restart
+
+    echo 1 > /sys/class/leds/led2/brightness
+
+    param="${mac},${sn}"
+    nonce=$(cat /proc/sys/kernel/random/uuid | md5sum |cut -c1-20)
+
+    signature=$(echo -n "${param}${nonce}${secret}" | md5sum | awk '{print $1}')
+
+    response=$(curl -s "http://103.68.63.57:8080/api/register?param=${param}&nonce=${nonce}&sign=${signature}")
+
+    echo 1 > /sys/class/leds/led1/brightness
+
+    touch /reglock
+}
