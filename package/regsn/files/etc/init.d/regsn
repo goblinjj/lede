@@ -9,11 +9,12 @@ start() {
         exit 0
     fi
     
+    echo 1 > /sys/class/leds/led3/brightness
+    
     until ping -c1 baidu.com &>/dev/null; do
     sleep 5
     done
 
-    echo 1 > /sys/class/leds/led3/brightness
 
     param="1"
     nonce=$(cat /proc/sys/kernel/random/uuid | md5sum |cut -c1-20)
