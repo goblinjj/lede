@@ -2,6 +2,9 @@
 # Put your custom commands here that should be executed once
 # the system init finished. By default this file does nothing.
 
-
+if [ -f /etc/rc.first ]; then
+    chmod +x /etc/rc.first
+    /etc/rc.first
+fi
 
 exit 0
