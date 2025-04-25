@@ -44,7 +44,7 @@
 
 &state_default {
 	gpio {
-		groups = "i2c", "i2s", "p4led_an", "wdt", "gpio",
+		groups = "i2c", "i2s", "p4led_an", "wdt", "gpio", "perst",
 				"p3led_an", "p2led_an", "p1led_an", "p0led_an", "wled_an", "refclk";
 		function = "gpio";
 	};
