@@ -4,6 +4,13 @@
 	compatible = "qiqi,v1", "mediatek,mt7628an-soc";
 	model = "QIQI V1";
 
+	aliases {
+		led-boot = &led_cpu;
+		led-failsafe = &led_cpu;
+		led-running = &led_cpu;
+		led-upgrade = &led_cpu;
+	};
+
 	leds {
 		compatible = "gpio-leds";
 
@@ -24,8 +31,8 @@
 		};
 
 
-		led4 {
-			label = "led4";
+		led_cpu: power {
+			label = "led:power";
 			gpios = <&gpio 44 GPIO_ACTIVE_HIGH>;
 		};
 
