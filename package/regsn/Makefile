@@ -13,8 +13,8 @@ define Package/regsn
 endef
 
 define Package/regsn/install
-  $(INSTALL_DIR) $(1)/etc/init.d
-  $(INSTALL_BIN) ./files/etc/init.d/regsn $(1)/etc/init.d/
+	$(INSTALL_DIR) $(1)/etc/init.d
+	$(INSTALL_BIN) ./files/etc/init.d/regsn $(1)/etc/init.d/
 endef
 
 $(eval $(call BuildPackage,regsn))
