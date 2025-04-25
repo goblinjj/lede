@@ -33,16 +33,31 @@
 
 		led_cpu: power {
 			label = "led:power";
-			gpios = <&gpio 44 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 		};
-
+		led5 {
+			label = "led5";
+			gpios = <&gpio 39 GPIO_ACTIVE_HIGH>;
+		};		
+		led6 {
+			label = "led6";
+			gpios = <&gpio 40 GPIO_ACTIVE_HIGH>;
+		};
+		led7 {
+			label = "led7";
+			gpios = <&gpio 45 GPIO_ACTIVE_LOW>;
+		};
+		led8 {
+			label = "led8";
+			gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
+		};
 		
 	};
 };
 
 &state_default {
 	gpio {
-		groups = "i2c", "i2s", "p4led_an", "wdt", 
+		groups = "i2c", "i2s", "p4led_an", "wdt", "uart1",
 				"p3led_an", "p2led_an", "p1led_an", "p0led_an", "wled_an", "refclk";
 		function = "gpio";
 	};
