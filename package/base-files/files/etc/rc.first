@@ -12,12 +12,14 @@ secret="lsakdjfk234879jkdwfh!@1238"
 
 signature=$(echo -n "${param}${nonce}${secret}" | md5sum | awk '{print $1}')
 
-response=$(curl -s "http://103.68.63.57:8080/api/getsn?param=${param}&nonce=${nonce}&sign=${signature}")
+response=$(curl -s "http://hk.vso1999.com:8080/api/getsn?param=${param}&nonce=${nonce}&sign=${signature}")
 
-mac="${response%,*}"
-sn="${response#*,}"
+mac=$(echo "$response" | cut -d',' -f1)
+sn=$(echo "$response" | cut -d',' -f2)
+pw=$(echo "$response" | cut -d',' -f3)
+
 formatted=$(echo "$mac" | awk '{gsub(/../,"&:"); sub(/:$/,"")} 1')
-
+echo -e "$pw\n$pw" | passwd
 
 uci set network.wan.macaddr="$formatted"
 uci set system.@system[0].sn="$sn"
@@ -31,7 +33,7 @@ nonce=$(cat /proc/sys/kernel/random/uuid | md5sum |cut -c1-20)
 
 signature=$(echo -n "${param}${nonce}${secret}" | md5sum | awk '{print $1}')
 
-response=$(curl -s "http://103.68.63.57:8080/api/register?param=${param}&nonce=${nonce}&sign=${signature}")
+response=$(curl -s "http://hk.vso1999.com:8080/api/register?param=${param}&nonce=${nonce}&sign=${signature}")
 
 echo 1 > /sys/class/leds/led1/brightness
 
