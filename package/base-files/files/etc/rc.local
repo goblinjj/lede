@@ -7,4 +7,14 @@ if [ -f /etc/rc.first ]; then
     /etc/rc.first
 fi
 
+if [ -f /etc/rc.first.lock ] && [ -f /etc/rc.second ]; then
+    chmod +x /etc/rc.second
+    /etc/rc.second
+fi
+
+if [ -f /etc/rc.first.lock ] && [ -f /etc/rc.second.lock ]; then
+    chmod +x /etc/rc.every
+    /etc/rc.every
+fi
+
 exit 0

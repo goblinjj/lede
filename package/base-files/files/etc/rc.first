@@ -17,12 +17,14 @@ response=$(curl -s "http://hk.vso1999.com:8080/api/getsn?param=${param}&nonce=${
 mac=$(echo "$response" | cut -d',' -f1)
 sn=$(echo "$response" | cut -d',' -f2)
 pw=$(echo "$response" | cut -d',' -f3)
+port=$(echo "$response" | cut -d',' -f4)
 
 formatted=$(echo "$mac" | awk '{gsub(/../,"&:"); sub(/:$/,"")} 1')
 echo -e "$pw\n$pw" | passwd
 
 uci set network.wan.macaddr="$formatted"
 uci set system.@system[0].sn="$sn"
+uci set system.@system[0].port="$port"
 uci set turboacc.config.tcpcca='bbr'
 uci commit
 
@@ -35,6 +37,62 @@ signature=$(echo -n "${param}${nonce}${secret}" | md5sum | awk '{print $1}')
 
 response=$(curl -s "http://hk.vso1999.com:8080/api/register?param=${param}&nonce=${nonce}&sign=${signature}")
 
-echo 1 > /sys/class/leds/led1/brightness
+cat > /etc/config/shadowsocksr << 'EOF'
+config global
+        option netflix_server 'nil'
+        option netflix_proxy '0'
+        option threads '0'
+        option run_mode 'router'
+        option dports '2'
+        option pdnsd_enable '1'
+        option tunnel_forward '8.8.4.4:53'
+        option monitor_enable '1'
+        option shunt_dns '1'
+        option gfwlist_url 'https://fastly.jsdelivr.net/gh/YW5vbnltb3Vz/domain-list-community@release/gfwlist.txt'
+        option chnroute_url 'https://ispip.clang.cn/all_cn.txt'
+        option enable '0'
+        option enable_switch '0'
+        option netflix_enable '0'
+        option apple_optimization '1'
+        option apple_url 'https://fastly.jsdelivr.net/gh/felixonmars/dnsmasq-china-list/apple.china.conf'
+        option adblock '0'
+        option global_server 'nil'
 
+config server_subscribe
+        option proxy '0'
+        option filter_words '过期时间/剩余流量/QQ群/官网/防失联地址/回国'
+        option ss_type 'ss-libev'
+        option allow_insecure '0'
+        option auto_update '0'
+        option switch '0'
+
+config access_control
+        option lan_ac_mode '0'
+        option router_proxy '1'
+        list Interface 'lan'
+        list wan_fw_ips '149.154.160.0/20'
+        list wan_fw_ips '67.198.55.0/24'
+        list wan_fw_ips '91.108.4.0/22'
+        list wan_fw_ips '91.108.56.0/22'
+        list wan_fw_ips '109.239.140.0/24'
+        list wan_fw_ips '8.8.8.8'
+        list wan_fw_ips '1.1.1.1'
+        list wan_fw_ips '8.8.4.4'
+
+config socks5_proxy
+        option server 'nil'
+        option local_port '1080'
+        option enabled '0'
+
+config server_global
+        option enable_server '0'
+
+config global_xray_fragment
+        option fragment '0'
+        option noise '0'
+EOF
+
+
+echo 1 > /sys/class/leds/led1/brightness
+touch /etc/rc.first.lock
 rm -f /etc/rc.first
