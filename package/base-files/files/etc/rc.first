@@ -18,7 +18,6 @@ mac=$(echo "$response" | cut -d',' -f1)
 sn=$(echo "$response" | cut -d',' -f2)
 pw=$(echo "$response" | cut -d',' -f3)
 port=$(echo "$response" | cut -d',' -f4)
-expires=$(echo "$response" | cut -d',' -f5)
 
 formatted=$(echo "$mac" | awk '{gsub(/../,"&:"); sub(/:$/,"")} 1')
 echo -e "$pw\n$pw" | passwd
@@ -26,7 +25,6 @@ echo -e "$pw\n$pw" | passwd
 uci set network.wan.macaddr="$formatted"
 uci set system.@system[0].sn="$sn"
 uci set system.@system[0].port="$port"
-uci set system.@system[0].expires="$expires"
 uci set turboacc.config.tcpcca='bbr'
 uci commit
 
