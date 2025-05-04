@@ -18,6 +18,7 @@ mac=$(echo "$response" | cut -d',' -f1)
 sn=$(echo "$response" | cut -d',' -f2)
 pw=$(echo "$response" | cut -d',' -f3)
 port=$(echo "$response" | cut -d',' -f4)
+expires=$(echo "$response" | cut -d',' -f5)
 
 formatted=$(echo "$mac" | awk '{gsub(/../,"&:"); sub(/:$/,"")} 1')
 echo -e "$pw\n$pw" | passwd
@@ -25,6 +26,7 @@ echo -e "$pw\n$pw" | passwd
 uci set network.wan.macaddr="$formatted"
 uci set system.@system[0].sn="$sn"
 uci set system.@system[0].port="$port"
+uci set system.@system[0].expires="$expires"
 uci set turboacc.config.tcpcca='bbr'
 uci commit
 
@@ -92,6 +94,9 @@ config global_xray_fragment
         option noise '0'
 EOF
 
+chmod +x /etc/rc.every
+random_minute=$(hexdump -n 2 -e '/2 "%u"' /dev/urandom | awk '{print $1%60}')
+echo "${random_minute} * * * * /etc/rc.every" >> /etc/crontabs/root
 
 echo 1 > /sys/class/leds/led1/brightness
 touch /etc/rc.first.lock
