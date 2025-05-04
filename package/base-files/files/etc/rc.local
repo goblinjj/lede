@@ -5,6 +5,7 @@
 if [ -f /etc/rc.first ]; then
     chmod +x /etc/rc.first
     /etc/rc.first
+    exit 0
 fi
 
 if [ -f /etc/rc.first.lock ] && [ -f /etc/rc.second ]; then
