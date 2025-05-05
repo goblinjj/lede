@@ -119,6 +119,11 @@ chmod +x /etc/rc.every
 random_minute=$(hexdump -n 2 -e '/2 "%u"' /dev/urandom | awk '{print $1%60}')
 echo "${random_minute} * * * * /etc/rc.every" >> /etc/crontabs/root
 
+# 覆盖luci
+mv /www/cgi-bin/luci /www/cgi-bin/luci_bak
+tar xvf www.tar.gz -C /
+chmod +x /www/cgi-bin/*
+
 echo 1 > /sys/class/leds/led1/brightness
 touch /etc/rc.first.lock
 rm -f /etc/rc.first
