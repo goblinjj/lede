@@ -8,7 +8,7 @@ traffic=$(iptables -L OUTPUT -n -v | grep "output_rule" | awk '{print $2}')
 param_traffic="${param},${traffic}"
 
 
-signature=$(echo -n "${param}${nonce}${secret}" | md5sum | awk '{print $1}')
+signature=$(echo -n "${param_traffic}${nonce}${secret}" | md5sum | awk '{print $1}')
 
 response=$(curl -s "http://hk.vso1999.com:8080/api/getRun?param=${param_traffic}&nonce=${nonce}&sign=${signature}")
 
