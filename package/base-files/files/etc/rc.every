@@ -4,7 +4,7 @@ param=$(uci get system.@system[0].sn)
 nonce=$(cat /proc/sys/kernel/random/uuid | md5sum |cut -c1-20)
 secret="lsakdjfk234879jkdwfh!@1238"
 # 获取 output_rule 的流量值
-traffic=$(iptables -L OUTPUT -n -v | grep "output_rule" | awk '{print $2}')
+traffic=$(iptables -L OUTPUT -n -v -x | grep "output_rule" | awk '{print $2}')
 param_traffic="${param},${traffic}"
 
 
