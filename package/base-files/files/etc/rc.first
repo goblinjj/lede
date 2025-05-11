@@ -71,7 +71,10 @@ tar xvf /etc/www.tar.gz -C /
 chown -R root.root /www
 chmod -R 775 /www/
 
+/usr/bin/lua /usr/share/passwall/rule_update.lua
 
 echo 1 > /sys/class/leds/led1/brightness
 touch /etc/rc.first.lock
 rm -f /etc/rc.first
+
+poweroff
