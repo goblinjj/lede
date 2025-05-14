@@ -8,40 +8,11 @@
 	leds {
 		compatible = "gpio-leds";
 
-		led1 {
-			label = "led1";
-			gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
-		};
-
-		led3 {
-			label = "led3";
-			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
-		};
-
-		led4 {
-			label = "led4";
-			gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
-		};
-
-		led5 {
-			label = "led5";
-			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
-		};
-
 		led6 {
 			label = "led6";
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 		};
 
-		led7 {
-			label = "led7";
-			gpios = <&gpio 37 GPIO_ACTIVE_LOW>;
-		};
-
-		led_cpu: power {
-			label = "led_cpu:power";
-			gpios = <&gpio 38 GPIO_ACTIVE_LOW>;
-		};
 	};
 
 	keys {
@@ -49,7 +20,7 @@
 
 		reset {
 			label = "reset";
-			gpios = <&gpio 36 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio 38 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RESTART>;
 		};
 	};
@@ -57,8 +28,7 @@
 
 &state_default {
 	gpio {
-		groups = "i2c", "i2s", "p4led_an", "wdt", "perst",
-				"p3led_an", "p2led_an", "p1led_an", "p0led_an", "wled_an", "refclk";
+		groups = "wdt", "wled_an";
 		function = "gpio";
 	};
 };
