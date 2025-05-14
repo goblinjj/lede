@@ -36,6 +36,13 @@ define Device/qiqi_v1
 endef
 TARGET_DEVICES += qiqi_v1
 
+define Device/windlink_v1
+  IMAGE_SIZE := 16064k
+  DEVICE_VENDOR := WindLink
+  DEVICE_MODEL := V1
+endef
+TARGET_DEVICES += windlink_v1
+
 define Device/alfa-network_awusfree1
   IMAGE_SIZE := 7872k
   DEVICE_VENDOR := ALFA Network

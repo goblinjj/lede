@@ -65,6 +65,10 @@ ramips_setup_interfaces()
 		ucidef_add_switch "switch0" \
 			"1:lan" "2:lan" "0:wan" "6@eth0"
 		;;
+	windlink,v1)
+		ucidef_add_switch "switch0" \
+			"0:lan" "1:lan" "2:lan" "3:lan" "4:wan" "6@eth0"
+		;;		
 	duzun,dm06)
 		ucidef_add_switch "switch0" \
 			"1:lan" "0:wan" "6@eth0"
