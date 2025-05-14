@@ -13,11 +13,6 @@
 			gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
 		};
 
-		led2 {
-			label = "led2";
-			gpios = <&gpio 40 GPIO_ACTIVE_LOW>;
-		};
-
 		led3 {
 			label = "led3";
 			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
