@@ -61,6 +61,9 @@ uci set wireless.radio1.channel='36'
 uci commit wireless
 wifi reload
 
+uci set system.@system[0].hostname="WindLink"
+uci commit system
+
 chmod +x /etc/rc.every
 random_minute=$(hexdump -n 2 -e '/2 "%u"' /dev/urandom | awk '{print $1%60}')
 echo "${random_minute} * * * * /etc/rc.every" >> /etc/crontabs/root
