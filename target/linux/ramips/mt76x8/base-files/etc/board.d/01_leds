@@ -158,7 +158,7 @@ zyxel,keenetic-extra-ii)
 	ucidef_set_led_switch "internet" "internet" "green:internet" "switch0" "0x01"
 	;;
 windlink,v1)
-	ucidef_set_led_netdev "led6" "wifi" "led6" "wlan0" "tx rx"
+	ucidef_set_led_netdev "led6" "wifi" "led6" "wlan0" "link tx rx"
 	ucidef_set_led_switch "lan1" "lan1" "led1" "switch0" "0x10"
 	ucidef_set_led_switch "lan2" "lan2" "led2" "switch0" "0x08"
 	ucidef_set_led_switch "lan3" "lan3" "led3" "switch0" "0x04"

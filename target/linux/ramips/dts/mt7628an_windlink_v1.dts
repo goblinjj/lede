@@ -4,12 +4,6 @@
 	compatible = "windlink,v1", "mediatek,mt7628an-soc";
 	model = "WindLink V1";
 
-	aliases {
-		led-boot = &led_cpu;
-		led-failsafe = &led_cpu;
-		led-running = &led_cpu;
-		led-upgrade = &led_cpu;
-	};
 
 	leds {
 		compatible = "gpio-leds";
