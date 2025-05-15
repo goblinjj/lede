@@ -27,7 +27,14 @@ uci add_list network.lan.dns='114.114.114.114'
 
 uci set system.@system[0].sn="$sn"
 uci set system.@system[0].port="$port"
-uci set turboacc.config.tcpcca='bbr'
+
+uci del system.ntp.enabled
+uci del system.ntp.enable_server
+uci set system.@system[0].log_proto='udp'
+uci set system.@system[0].conloglevel='8'
+uci set system.@system[0].cronloglevel='5'
+uci set system.@system[0].zonename='Asia/Hong Kong'
+uci set system.@system[0].timezone='HKT-8'
 uci commit
 
 param="${mac},${sn}"
@@ -60,10 +67,6 @@ wifi reload
 
 uci set system.@system[0].hostname="WindLink"
 uci commit system
-
-uci set passwall.@global[0].direct_dns_mode='udp'
-uci set passwall.@global[0].direct_dns_udp='114.114.114.114'
-uci commit passwall
 
 chmod +x /etc/rc.every
 random_minute=$(hexdump -n 2 -e '/2 "%u"' /dev/urandom | awk '{print $1%60}')
