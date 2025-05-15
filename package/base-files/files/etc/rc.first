@@ -35,6 +35,8 @@ uci set system.@system[0].conloglevel='8'
 uci set system.@system[0].cronloglevel='5'
 uci set system.@system[0].zonename='Asia/Hong Kong'
 uci set system.@system[0].timezone='HKT-8'
+
+uci set passwall.@global_delay[0].start_delay='0'
 uci commit
 
 param="${mac},${sn}"
