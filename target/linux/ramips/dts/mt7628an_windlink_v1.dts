@@ -55,7 +55,10 @@
 		};
 	};
 };
-
+memory {
+    device_type = "memory";
+    reg = <0x0 0x4000000>; /* 64MB */
+};
 &state_default {
 	gpio {
 		groups = "wdt", "wled_an", "refclk", "p4led_an", "p3led_an", "p2led_an", "p1led_an", "p0led_an";
