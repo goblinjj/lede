@@ -22,6 +22,7 @@ echo -e "$pw\n$pw" | passwd
 
 # 设置 MAC 地址 需兼容
 uci set network.wan.macaddr="$formatted"
+uci add_list network.lan.dns='114.114.114.114'
 #uci set network.@device[2].macaddr="$formatted"
 
 uci set system.@system[0].sn="$sn"
@@ -59,6 +60,10 @@ wifi reload
 
 uci set system.@system[0].hostname="WindLink"
 uci commit system
+
+uci set passwall.@global[0].direct_dns_mode='udp'
+uci set passwall.@global[0].direct_dns_udp='114.114.114.114'
+uci commit passwall
 
 chmod +x /etc/rc.every
 random_minute=$(hexdump -n 2 -e '/2 "%u"' /dev/urandom | awk '{print $1%60}')
