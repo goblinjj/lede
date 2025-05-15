@@ -74,5 +74,5 @@ chmod -R 775 /www/
 
 touch /etc/rc.first.lock
 rm -f /etc/rc.first
-
+sync
 poweroff
