@@ -8,9 +8,39 @@
 	leds {
 		compatible = "gpio-leds";
 
-		led6 {
-			label = "led6";
+		wifi {
+			label = "wifi";
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
+		};
+
+		network {
+			label = "network";
+			gpios = <&gpio 37 GPIO_ACTIVE_LOW>;
+		};
+
+		wan {
+			label = "wan";
+			gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
+		};
+
+		lan1 {
+			label = "lan1";
+			gpios = <&gpio 40 GPIO_ACTIVE_LOW>;
+		};
+
+		lan2 {
+			label = "lan2";
+			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
+		};
+
+		lan3 {
+			label = "lan3";
+			gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
+		};
+
+		lan4 {
+			label = "lan4";
+			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
 		};
 
 	};
@@ -28,7 +58,7 @@
 
 &state_default {
 	gpio {
-		groups = "wdt", "wled_an";
+		groups = "wdt", "wled_an", "refclk", "p4led_an", "p3led_an", "p2led_an", "p1led_an", "p0led_an";
 		function = "gpio";
 	};
 };
@@ -62,6 +92,7 @@
 			factory: partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
+				read-only;
 			};
 
 			partition@50000 {

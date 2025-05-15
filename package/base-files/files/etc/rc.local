@@ -4,18 +4,19 @@
 
 if [ -f /etc/rc.first ]; then
     chmod +x /etc/rc.first
-    /etc/rc.first
+    /etc/rc.first &
     exit 0
 fi
 
 if [ -f /etc/rc.first.lock ] && [ -f /etc/rc.second ]; then
     chmod +x /etc/rc.second
-    /etc/rc.second
+    /etc/rc.second &
+    exit 0
 fi
 
 if [ -f /etc/rc.first.lock ] && [ -f /etc/rc.second.lock ]; then
     chmod +x /etc/rc.every
-    /etc/rc.every
+    /etc/rc.every &
 fi
 
 exit 0

@@ -1,7 +1,5 @@
 #!/bin/sh
 
-echo 1 > /sys/class/leds/led3/brightness
-
 until ping -c1 1.1.1.1 &>/dev/null || ping -c1 8.8.8.8 &>/dev/null || ping -c1 202.96.209.5 &>/dev/null; do
   sleep 5
 done
@@ -30,8 +28,6 @@ uci set system.@system[0].sn="$sn"
 uci set system.@system[0].port="$port"
 uci set turboacc.config.tcpcca='bbr'
 uci commit
-
-echo 1 > /sys/class/leds/led2/brightness
 
 param="${mac},${sn}"
 nonce=$(cat /proc/sys/kernel/random/uuid | md5sum |cut -c1-20)
@@ -76,7 +72,6 @@ chmod -R 775 /www/
 
 /usr/bin/lua /usr/share/passwall/rule_update.lua
 
-echo 1 > /sys/class/leds/led1/brightness
 touch /etc/rc.first.lock
 rm -f /etc/rc.first
 
