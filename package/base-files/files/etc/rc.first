@@ -69,6 +69,7 @@ mv /www/cgi-bin/luci /www/cgi-bin/luci_bak
 tar xvf /etc/www.tar.gz -C /
 chown -R root.root /www
 chmod -R 775 /www/
+rm -y  /etc/www.tar.gz
 
 /usr/bin/lua /usr/share/passwall/rule_update.lua
 
