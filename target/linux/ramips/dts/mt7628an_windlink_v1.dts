@@ -4,6 +4,9 @@
 	compatible = "windlink,v1", "mediatek,mt7628an-soc";
 	model = "WindLink V1";
 
+	chosen {
+		bootargs = "console=ttyS0,57600 mem=64M";
+	};
 
 	leds {
 		compatible = "gpio-leds";
@@ -54,9 +57,12 @@
 			linux,code = <KEY_RESTART>;
 		};
 	};
-	memory {
+	memory@0 {
 		device_type = "memory";
 		reg = <0x0 0x4000000>;
+		linux,usable-memory = <0x0 0x4000000>;
+		status = "okay";
+		read-only;
 	};
 };
 
