@@ -1,15 +1,22 @@
 #!/bin/sh
-
+sleep 30
 uci show passwall | grep '=nodes' | cut -d'.' -f2 | awk -F'=' '{print $1}' | while read node_id; do
     remark=$(uci get passwall.$node_id.remarks 2>/dev/null | sed 's/-[0-9]\+ms$//;s/-error$//')
     result=""
     (
-        /usr/share/passwall/test.sh url_test_node $node_id urltest_node
+        # 让 test.sh 作为新进程组 leader
+        exec /usr/share/passwall/test.sh url_test_node $node_id urltest_node 2>/dev/null
     ) > /tmp/pw_test_${node_id}.txt 2>&1 &
     test_pid=$!
+    # 通过 /proc 获取 PGID
+    if [ -f /proc/$test_pid/status ]; then
+        pgid=$(awk '/^Pgid:/ {print $2}' /proc/$test_pid/status)
+    else
+        pgid=$test_pid
+    fi
     (
         sleep 5
-        kill $test_pid 2>/dev/null
+        kill -TERM -$pgid 2>/dev/null
     ) &
     killer_pid=$!
     wait $test_pid 2>/dev/null
