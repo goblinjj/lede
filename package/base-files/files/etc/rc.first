@@ -22,7 +22,10 @@ echo -e "$pw\n$pw" | passwd
 
 # 设置 MAC 地址 需兼容
 uci set network.wan.macaddr="$formatted"
+uci del network.lan.dns
 uci add_list network.lan.dns='114.114.114.114'
+uci add_list network.lan.dns='223.5.5.5'
+uci set network.lan.ipaddr='192.168.18.1'
 #uci set network.@device[2].macaddr="$formatted"
 
 uci set system.@system[0].sn="$sn"
@@ -38,6 +41,7 @@ uci set system.@system[0].timezone='HKT-8'
 
 uci set passwall.@global_delay[0].start_delay='0'
 uci commit
+
 
 param="${mac},${sn}"
 nonce=$(cat /proc/sys/kernel/random/uuid | md5sum |cut -c1-20)
@@ -71,6 +75,9 @@ uci set system.@system[0].hostname="WindLink"
 uci commit system
 
 chmod +x /etc/rc.every
+chmod +x /etc/test_script.sh
+chmod +x /etc/check_lan_wan_ip.sh
+
 random_minute=$(hexdump -n 2 -e '/2 "%u"' /dev/urandom | awk '{print $1%60}')
 echo "${random_minute} * * * * /etc/rc.every" >> /etc/crontabs/root
 

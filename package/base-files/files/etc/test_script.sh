@@ -1,6 +1,12 @@
 #!/bin/sh
-sleep 30
-uci show passwall | grep '=nodes' | cut -d'.' -f2 | awk -F'=' '{print $1}' | while read node_id; do
+
+if [ -n "$1" ]; then
+    node_list="$1"
+else
+    node_list=$(uci show passwall | grep '=nodes' | cut -d'.' -f2 | awk -F'=' '{print $1}')
+fi
+
+for node_id in $node_list; do
     remark=$(uci get passwall.$node_id.remarks 2>/dev/null | sed 's/-[0-9]\+ms$//;s/-error$//')
     result=""
     (

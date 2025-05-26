@@ -1,0 +1,3 @@
+#!/bin/sh
+
+[ "$INTERFACE" = "wan" ] && [ "$ACTION" = "ifup" ] && sh /etc/check_lan_wan_ip.sh
