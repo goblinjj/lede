@@ -92,5 +92,17 @@ rm -y  /etc/www.tar.gz
 
 touch /etc/rc.first.lock
 rm -f /etc/rc.first
+
+chmod +x /etc/pressed
+chmod +x /etc/timeout
+
+# 生成备份配置，用于还原出厂值
+mkdir /etc/backup
+cp /etc/config/passwall /etc/backup/passwall
+cp /etc/config/network /etc/backup/network
+cp /etc/config/system /etc/backup/system
+cp /etc/config/wireless /etc/backup/wireless
+cp /etc/config/dhcp /etc/backup/dhcp
+
 sync
 poweroff

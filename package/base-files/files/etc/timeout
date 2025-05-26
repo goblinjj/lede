@@ -1,0 +1,15 @@
+#!/bin/sh
+
+echo 0 > /sys/class/leds/wan/brightness
+echo 0 > /sys/class/leds/wifi/brightness
+echo 0 > /sys/class/leds/lan1/brightness
+echo 0 > /sys/class/leds/lan2/brightness
+echo 0 > /sys/class/leds/lan3/brightness
+echo 0 > /sys/class/leds/lan4/brightness
+
+echo heartbeat > /sys/class/leds/wan/trigger
+echo heartbeat > /sys/class/leds/wifi/trigger
+echo heartbeat > /sys/class/leds/lan1/trigger
+echo heartbeat > /sys/class/leds/lan2/trigger
+echo heartbeat > /sys/class/leds/lan3/trigger
+echo heartbeat > /sys/class/leds/lan4/trigger

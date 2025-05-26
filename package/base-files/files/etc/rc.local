@@ -10,7 +10,7 @@ if [ -f /etc/rc.first ]; then
     exit 0
 fi
 
-if [ -f /etc/rc.first.lock ] && [ -f /etc/rc.second ]; then
+if [ -f /etc/rc.first.lock ] && [ ! -f /etc/rc.second.lock ]; then
     chmod +x /etc/rc.second
     /etc/rc.second &
     exit 0

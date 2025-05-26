@@ -1,0 +1,15 @@
+#!/bin/sh
+
+echo default-on > /sys/class/leds/wan/trigger
+echo default-on > /sys/class/leds/wifi/trigger
+echo default-on > /sys/class/leds/lan1/trigger
+echo default-on > /sys/class/leds/lan2/trigger
+echo default-on > /sys/class/leds/lan3/trigger
+echo default-on > /sys/class/leds/lan4/trigger
+
+echo 1 > /sys/class/leds/wan/brightness
+echo 1 > /sys/class/leds/wifi/brightness
+echo 1 > /sys/class/leds/lan1/brightness
+echo 1 > /sys/class/leds/lan2/brightness
+echo 1 > /sys/class/leds/lan3/brightness
+echo 1 > /sys/class/leds/lan4/brightness
