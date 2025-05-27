@@ -5,7 +5,7 @@
 	model = "WindLink V1";
 
 	chosen {
-		bootargs = "console=ttyS0,57600 mem=64M";
+		bootargs = "console=none,57600 mem=64M";
 	};
 
 	leds {
