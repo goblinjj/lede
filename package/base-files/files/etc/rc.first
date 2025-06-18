@@ -21,12 +21,12 @@ formatted=$(echo "$mac" | awk '{gsub(/../,"&:"); sub(/:$/,"")} 1')
 echo -e "$pw\n$pw" | passwd
 
 # 设置 MAC 地址 需兼容
-uci set network.wan.macaddr="$formatted"
+#uci set network.wan.macaddr="$formatted"
+uci set network.@device[2].macaddr="$formatted"
 uci del network.lan.dns
 uci add_list network.lan.dns='114.114.114.114'
 uci add_list network.lan.dns='223.5.5.5'
 uci set network.lan.ipaddr='192.168.18.1'
-#uci set network.@device[2].macaddr="$formatted"
 
 uci set system.@system[0].sn="$sn"
 uci set system.@system[0].port="$port"
@@ -54,25 +54,31 @@ response=$(curl -s "http://hk.vso1999.com:8080/api/register?param=${param}&nonce
 # 初始化 wireless 需兼容
 uci set wireless.radio0.disabled=0
 uci set wireless.default_radio0.disabled=0
-uci set wireless.default_radio0.ssid="WindLink"
+uci set wireless.default_radio0.ssid="verygood"
 uci set wireless.radio0.channel='1'
 uci set wireless.radio0.cell_density='0'
 uci set wireless.default_radio0.encryption='psk2'
 uci set wireless.default_radio0.key='12345678'
 
-# uci set wireless.radio1.disabled=0
-# uci set wireless.default_radio1.disabled=0
-# uci set wireless.default_radio1.ssid="WindLink_5G"
-# uci set wireless.radio1.cell_density='0'
-# uci set wireless.default_radio1.encryption='psk2'
-# uci set wireless.default_radio1.key='12345678'
-# uci set wireless.radio1.channel='36'
+uci set wireless.radio1.disabled=0
+uci set wireless.default_radio1.disabled=0
+uci set wireless.default_radio1.ssid="verygood_5G"
+uci set wireless.radio1.cell_density='0'
+uci set wireless.default_radio1.encryption='psk2'
+uci set wireless.default_radio1.key='12345678'
+uci set wireless.radio1.channel='36'
 
 uci commit wireless
 wifi reload
 
-uci set system.@system[0].hostname="WindLink"
+uci set system.@system[0].hostname="verygood"
 uci commit system
+
+#需要兼容
+uci set dropbear.@dropbear[0].enable=1
+uci del dropbear.@dropbear[0].Interface
+uci del dropbear.@dropbear[0].RootPasswordAuth
+uci commit dropbear
 
 chmod +x /etc/rc.every
 chmod +x /etc/test_script.sh
