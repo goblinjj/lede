@@ -75,7 +75,7 @@ uci set system.@system[0].hostname="verygood"
 uci commit system
 
 #需要兼容
-uci set dropbear.@dropbear[0].enable=1
+uci set dropbear.@dropbear[0].enable=0
 uci del dropbear.@dropbear[0].Interface
 uci del dropbear.@dropbear[0].RootPasswordAuth
 uci commit dropbear
