@@ -4,6 +4,9 @@ until ping -c1 1.1.1.1 &>/dev/null || ping -c1 8.8.8.8 &>/dev/null || ping -c1 2
   sleep 5
 done
 
+chmod +x /etc/timeout 
+/etc/timeout 
+
 param="1"
 nonce=$(cat /proc/sys/kernel/random/uuid | md5sum |cut -c1-20)
 secret="lsakdjfk234879jkdwfh!@1238"
@@ -21,8 +24,8 @@ formatted=$(echo "$mac" | awk '{gsub(/../,"&:"); sub(/:$/,"")} 1')
 echo -e "$pw\n$pw" | passwd
 
 # 设置 MAC 地址 需兼容
-#uci set network.wan.macaddr="$formatted"
-uci set network.@device[2].macaddr="$formatted"
+uci set network.wan.macaddr="$formatted"
+# uci set network.@device[2].macaddr="$formatted"
 uci del network.lan.dns
 uci add_list network.lan.dns='114.114.114.114'
 uci add_list network.lan.dns='223.5.5.5'
@@ -60,13 +63,13 @@ uci set wireless.radio0.cell_density='0'
 uci set wireless.default_radio0.encryption='psk2'
 uci set wireless.default_radio0.key='12345678'
 
-uci set wireless.radio1.disabled=0
-uci set wireless.default_radio1.disabled=0
-uci set wireless.default_radio1.ssid="verygood_5G"
-uci set wireless.radio1.cell_density='0'
-uci set wireless.default_radio1.encryption='psk2'
-uci set wireless.default_radio1.key='12345678'
-uci set wireless.radio1.channel='36'
+# uci set wireless.radio1.disabled=0
+# uci set wireless.default_radio1.disabled=0
+# uci set wireless.default_radio1.ssid="verygood_5G"
+# uci set wireless.radio1.cell_density='0'
+# uci set wireless.default_radio1.encryption='psk2'
+# uci set wireless.default_radio1.key='12345678'
+# uci set wireless.radio1.channel='36'
 
 uci commit wireless
 wifi reload
@@ -96,8 +99,6 @@ rm -y  /etc/www.tar.gz
 
 # /usr/bin/lua /usr/share/passwall/rule_update.lua print gfwlist,chnroute,chnlist
 
-touch /etc/rc.first.lock
-rm -f /etc/rc.first
 
 chmod +x /etc/pressed
 chmod +x /etc/timeout
@@ -109,6 +110,9 @@ cp /etc/config/network /etc/backup/network
 cp /etc/config/system /etc/backup/system
 cp /etc/config/wireless /etc/backup/wireless
 cp /etc/config/dhcp /etc/backup/dhcp
+
+touch /etc/rc.first.lock
+rm -f /etc/rc.first
 
 sync
 poweroff
