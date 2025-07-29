@@ -17,7 +17,7 @@ timeout)
 released)
 	if [ "$SEEN" -ge 5 -a -n "$OVERLAY" ]
 	then
-		echo "FACTORY RESET" > /dev/console
+		logger "FACTORY RESET"
 		cp /etc/backup/passwall /etc/config/passwall
 		cp /etc/backup/network /etc/config/network
 		cp /etc/backup/system /etc/config/system
