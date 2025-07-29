@@ -48,10 +48,17 @@ uci set system.@system[0].zonename='Asia/Hong Kong'
 uci set system.@system[0].timezone='HKT-8'
 
 uci set passwall.@global_delay[0].start_delay='0'
+
 uci set passwall.@global[0].dns_shunt='chinadns-ng'
 uci set passwall.@global[0].dns_mode='dot'
 uci del passwall.@global[0].remote_dns
 uci set passwall.@global[0].remote_dns_dot='tls://1.1.1.1'
+
+uci set passwall.@global[0].chinadns_ng_default_tag='none'
+uci set passwall.@global[0].chn_list='direct'
+uci del passwall.@global[0].use_gfw_list
+uci set passwall.@global[0].tcp_proxy_mode='proxy'
+uci set passwall.@global[0].udp_proxy_mode='proxy'
 
 uci commit
 
